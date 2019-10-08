@@ -20,10 +20,11 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 
+
 @Mod("testmodyeetus")
 public class TestMod 
 {
-	
+
 	public static TestMod instance;
 	public static final String modid = "testmodyeetus";
 	private static final Logger logger = LogManager.getLogger(modid);
@@ -55,26 +56,37 @@ public class TestMod
 		@SubscribeEvent
 		public static void registerItems(final RegistryEvent.Register<Item> event)
 		{
-			event.getRegistry().registerAll
-			(
-					ItemList.cobalt_ingot = new Item(new Item.Properties().group(test)).setRegistryName(location("cobalt_ingot")),
-					ItemList.cobalt_block = new BlockItem(BlockList.cobalt_block, new Item.Properties().group(test)).setRegistryName(BlockList.cobalt_block.getRegistryName())
-					//copy and paste ^^ to add new items
-			);
-			
+            ItemList.cobalt_ingot = new Item(new Item.Properties().group(test)).setRegistryName(location("cobalt_ingot"));
+            ItemList.ludonite_ingot = new Item(new Item.Properties().group(test)).setRegistryName(location("ludonite_ingot"));
+            ItemList.cobalt_block = new BlockItem(BlockList.cobalt_block, new Item.Properties().group(test)).setRegistryName(BlockList.cobalt_block.getRegistryName());
+            ItemList.ludonite_block = new BlockItem(BlockList.ludonite_block, new Item.Properties().group(test)).setRegistryName(BlockList.ludonite_block.getRegistryName());
+
+            event.getRegistry().registerAll
+            (
+                ItemList.cobalt_ingot,
+                ItemList.ludonite_ingot,
+                ItemList.cobalt_block,
+                ItemList.ludonite_block
+            );
 			logger.info("Items registered.");
 		}
-	}
+	
 	
 		@SubscribeEvent
-		public static void registerBlock(final RegistryEvent.Register<Block> event)
+		public static void registerBlocks(final RegistryEvent.Register<Block> event)
 		{
+			
+			BlockList.ludonite_block = new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(5.0f, 3.0f).lightValue(6).sound(SoundType.METAL)).setRegistryName(location("ludonite_block"));
+			BlockList.cobalt_block = new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(2.0f, 3.0f).lightValue(2).sound(SoundType.METAL)).setRegistryName(location("cobalt_block"));
+			//copy and paste ^^ to add new items
+			//Don't forget to add a blockstate when making a block
+			//Update models --> block, the lang file, and textures --> block
+			
 			event.getRegistry().registerAll
 			(	
-					BlockList.cobalt_block = new Block(Block.Properties.create(Material.IRON).hardnessAndResistance(2.0f, 3.0f).lightValue(2).sound(SoundType.METAL)).setRegistryName(location("cobalt_block"))
-					//copy and paste ^^ to add new items
-					);
-		
+					BlockList.cobalt_block,
+					BlockList.ludonite_block
+			);
 			logger.info("Blocks registered.");
 		}
 	
@@ -83,5 +95,6 @@ public class TestMod
 		{
 			return new ResourceLocation(modid, name);
 		}
+	}
 }
 
