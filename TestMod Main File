@@ -3,11 +3,14 @@ package hashtagpinoy.testmod;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
+import hashtagpinoy.testmod.lists.ArmorMaterialList;
 import hashtagpinoy.testmod.lists.BlockList;
 import hashtagpinoy.testmod.lists.ItemList;
 import net.minecraft.block.Block;
 import net.minecraft.block.SoundType;
 import net.minecraft.block.material.Material;
+import net.minecraft.inventory.EquipmentSlotType;
+import net.minecraft.item.ArmorItem;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemGroup;
@@ -30,6 +33,8 @@ public class TestMod
 	private static final Logger logger = LogManager.getLogger(modid);
 	
 	public static final ItemGroup test = new TestItemGroup();
+	public static final ItemGroup blocks = new BlockItemGroup();
+	public static final ItemGroup armor = new ArmorItemGroup();
 	
 	public TestMod() 
 	{
@@ -59,11 +64,17 @@ public class TestMod
             ItemList.cobalt_ingot = new Item(new Item.Properties().group(test)).setRegistryName(location("cobalt_ingot"));
             ItemList.ludonite_ingot = new Item(new Item.Properties().group(test)).setRegistryName(location("ludonite_ingot"));
             ItemList.ruby = new Item(new Item.Properties().group(test)).setRegistryName(location("ruby"));
-            ItemList.cobalt_block = new BlockItem(BlockList.cobalt_block, new Item.Properties().group(test)).setRegistryName(BlockList.cobalt_block.getRegistryName());
-            ItemList.ludonite_block = new BlockItem(BlockList.ludonite_block, new Item.Properties().group(test)).setRegistryName(BlockList.ludonite_block.getRegistryName());
-            ItemList.ruby_ore = new BlockItem(BlockList.ruby_ore, new Item.Properties().group(test)).setRegistryName(BlockList.ruby_ore.getRegistryName());
-            ItemList.cobalt_ore = new BlockItem(BlockList.cobalt_ore, new Item.Properties().group(test)).setRegistryName(BlockList.cobalt_ore.getRegistryName());
+            ItemList.cobalt_block = new BlockItem(BlockList.cobalt_block, new Item.Properties().group(blocks)).setRegistryName(BlockList.cobalt_block.getRegistryName());
+            ItemList.ludonite_block = new BlockItem(BlockList.ludonite_block, new Item.Properties().group(blocks)).setRegistryName(BlockList.ludonite_block.getRegistryName());
+            ItemList.ruby_ore = new BlockItem(BlockList.ruby_ore, new Item.Properties().group(blocks)).setRegistryName(BlockList.ruby_ore.getRegistryName());
+            ItemList.cobalt_ore = new BlockItem(BlockList.cobalt_ore, new Item.Properties().group(blocks)).setRegistryName(BlockList.cobalt_ore.getRegistryName());
 
+            
+            //armor
+            ItemList.cobalt_helmet = new ArmorItem(ArmorMaterialList.cobalt, EquipmentSlotType.HEAD, new Item.Properties().group(armor)).setRegistryName(location("cobalt_helmet"));
+            ItemList.cobalt_chestplate = new ArmorItem(ArmorMaterialList.cobalt, EquipmentSlotType.CHEST, new Item.Properties().group(armor)).setRegistryName(location("cobalt_chestplate"));
+            ItemList.cobalt_leggings = new ArmorItem(ArmorMaterialList.cobalt, EquipmentSlotType.LEGS, new Item.Properties().group(armor)).setRegistryName(location("cobalt_leggings"));
+            ItemList.cobalt_boots = new ArmorItem(ArmorMaterialList.cobalt, EquipmentSlotType.FEET, new Item.Properties().group(armor)).setRegistryName(location("cobalt_boots"));
             event.getRegistry().registerAll
             (
                 ItemList.cobalt_ingot,
@@ -72,7 +83,14 @@ public class TestMod
                 ItemList.ludonite_block,
                 ItemList.ruby,
                 ItemList.ruby_ore,
-                ItemList.cobalt_ore
+                ItemList.cobalt_ore,
+                
+                
+                //armor pieces
+                ItemList.cobalt_helmet,
+                ItemList.cobalt_chestplate,
+                ItemList.cobalt_leggings,
+                ItemList.cobalt_boots
             );
 			logger.info("Items registered.");
 		}
