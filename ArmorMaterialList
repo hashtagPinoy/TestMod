@@ -1,6 +1,7 @@
 package hashtagpinoy.testmod.lists;
 
 import hashtagpinoy.testmod.TestMod;
+
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.IArmorMaterial;
 import net.minecraft.item.Item;
@@ -10,7 +11,7 @@ import net.minecraft.util.SoundEvent;
 
 public enum ArmorMaterialList implements IArmorMaterial
 {
-	cobalt( "cobalt", 500, new int[] {10, 12, 11, 9}, 40, ItemList.cobalt_ingot, "item.armor.equip_diamond", 0.0f);
+	cobalt( "cobalt", 500, new int[] {7, 9, 10, 7}, 30, ItemList.cobalt_ingot, "item.armor.equip_diamond", 0.0f);
 	
 	private static final int[] max_damage_array = new int[] {13, 15, 16, 11};
 	public String name, equipSound;
@@ -66,4 +67,5 @@ public enum ArmorMaterialList implements IArmorMaterial
 	public float getToughness() {
 		return this.toughness;
 	}
+	
 }
